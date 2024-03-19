@@ -1,0 +1,42 @@
+version: '3.1'
+
+services:
+  master_debian:
+    container_name: master_debian
+    environment:
+      - ANSIBLE_CONFIG=/ansible/ansible.cfg
+    build:
+      context: .
+      dockerfile: Dockerfile_master
+    volumes:
+      - ./ansible_files:/ansible
+    networks:
+      my_net:
+        ipv4_address: ${MASTER_DEBIAN_IP}
+
+  first_worker_debian:
+    container_name: first_worker_debian
+    build:
+      context: .
+      dockerfile: Dockerfile_worker
+    networks:
+      my_net:
+        ipv4_address: ${FIRST_WORKER_DEBIAN_IP}
+
+  second_worker_debian:
+    container_name: second_worker_debian
+    build:
+      context: .
+      dockerfile: Dockerfile_worker
+    networks:
+      my_net:
+        ipv4_address: ${SECOND_WORKER_DEBIAN_IP}
+
+
+networks:
+  my_net:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: ${SUBNET}
+        gateway: ${GATEWAY}

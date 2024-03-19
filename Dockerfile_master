@@ -1,0 +1,10 @@
+FROM debian:latest
+WORKDIR /ansible
+RUN apt update -y && apt install ansible -y && apt install ssh -y && apt install vim -y && apt install sshpass -y
+RUN rm /etc/ssh/sshd_config
+COPY sshd_config /etc/ssh/sshd_config
+COPY container_script.sh /scripts/container_script.sh
+RUN chmod 777 /scripts/container_script.sh
+RUN echo 'root:root' | chpasswd
+CMD ["bash", "/scripts/container_script.sh"]
+# COPY ansible_files /ansible/
