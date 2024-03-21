@@ -2,8 +2,11 @@ FROM debian:latest
 RUN apt update && apt install ssh -y && apt install python3 -y
 RUN rm /etc/ssh/sshd_config
 COPY sshd_config /etc/ssh/sshd_config
-COPY container_script.sh /scripts/container_script.sh
-RUN chmod 777 /scripts/container_script.sh
 RUN echo 'root:root' | chpasswd
-CMD ["./scripts/container_script.sh"]
+
+RUN mkdir /scripts && echo "#! /bin/bash" > /scripts/container_script.sh 
+RUN echo "/etc/init.d/ssh start" >> /scripts/container_script.sh
+RUN echo "tail -f /dev/null" >> /scripts/container_script.sh
+RUN chmod 777 /scripts/container_script.sh
+ENTRYPOINT ["bash", "/scripts/container_script.sh"]
 # CMD ["/usr/sbin/sshd","-D"]

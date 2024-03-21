@@ -3,8 +3,10 @@ WORKDIR /ansible
 RUN apt update -y && apt install ansible -y && apt install ssh -y && apt install vim -y && apt install sshpass -y
 RUN rm /etc/ssh/sshd_config
 COPY sshd_config /etc/ssh/sshd_config
-COPY container_script.sh /scripts/container_script.sh
-RUN chmod 777 /scripts/container_script.sh
 RUN echo 'root:root' | chpasswd
-CMD ["bash", "/scripts/container_script.sh"]
-# COPY ansible_files /ansible/
+
+RUN mkdir /scripts && echo "#! /bin/bash" > /scripts/container_script.sh 
+RUN echo "/etc/init.d/ssh start" >> /scripts/container_script.sh
+RUN echo "tail -f /dev/null" >> /scripts/container_script.sh
+RUN chmod 777 /scripts/container_script.sh
+ENTRYPOINT ["bash", "/scripts/container_script.sh"]
