@@ -18,12 +18,12 @@ All you need is only Docker (Docker Compose) and if you use Windows, then you ne
 ## Getting Started
 
 ### Setup
-1. **Clone this repo and go to "docker-ansible-playground" folder**
+1. Clone this repo and go to "docker-ansible-playground" folder
    ```bash
    git clone https://github.com/eklipsan/docker-ansible-playground.git
    cd docker-ansible-plaground
    ```
-2. **Build and Run Containers**:
+2. Build and Run Containers:
    Use handy bash script `init_ansible_playground` to configure your ansible setup.
    ```bash
    chmod 777 init_ansible_playground
@@ -32,11 +32,18 @@ All you need is only Docker (Docker Compose) and if you use Windows, then you ne
 P.S. If you are deploying the project to https://labs.play-with-docker.com, then you just need to use the default values given in square brackets by simply pressing Enter
 
 3. Using this script you'll be asked questions to customize ansible playground. A small instruction how to configure it correctly:
-- Enter your address of the subnet that has access to the Internet for best performance with ansible, with a shortened mask like 192.168.1.0/24
-- Enter the gateway address of your entered subnet. Example 192.168.1.1
-- Now you need to enter the ip addresses for the master and worker containers. Enter the addresses that are included in the subnet entered earlier and those that are free. For example, 192.168.213
+   - Enter your address of the subnet that has access to the Internet for best performance with ansible, with a shortened mask like 192.168.1.0/24
+   - Enter the gateway address of your entered subnet. Example 192.168.1.1
+   - Now you need to enter the ip addresses for the master and worker containers. Enter the addresses that are included in the subnet entered earlier and those that are free. For example, 192.168.213
 
 After entering the parameters, the process of building containers will start (1-2 minutes) and at the end you will find yourself in the master container in the working directory of ansible. where you can start learning this tool.
+
+1. If you want to finish working with ansible playground, just type the following in your terminal:
+   ```bash
+   docker compose down
+   ```
+
+2. The next time you run ansible playground, use the bash script `init_ansible_playground.sh`  again and you might set different addresses compared to the last launch
 
 ### Configuration Files
 
