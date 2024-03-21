@@ -11,7 +11,7 @@ services:
     volumes:
       - ./ansible_files:/ansible
     networks:
-      my_net:
+      ansible_net:
         ipv4_address: ${MASTER_DEBIAN_IP}
 
   first_worker_debian:
@@ -20,7 +20,7 @@ services:
       context: .
       dockerfile: Dockerfile_worker
     networks:
-      my_net:
+      ansible_net:
         ipv4_address: ${FIRST_WORKER_DEBIAN_IP}
 
   second_worker_debian:
@@ -29,12 +29,12 @@ services:
       context: .
       dockerfile: Dockerfile_worker
     networks:
-      my_net:
+      ansible_net:
         ipv4_address: ${SECOND_WORKER_DEBIAN_IP}
 
 
 networks:
-  my_net:
+  ansible_net:
     driver: bridge
     ipam:
       config:
