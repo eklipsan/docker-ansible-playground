@@ -42,7 +42,8 @@ read_with_validation() {
 # Main function to run the setup
 setup() {
     # Explain the project's idea
-    echo "This project sets up a Docker-based environment for developing and testing Ansible playbooks."
+    echo "This script sets up a Docker-based environment for developing and testing Ansible playbooks."
+    echo "Values framed by square brackets are inserted into variables at empty input."
 
     # Get network configuration from the user or use default values with validation
     read_with_validation SUBNET "192.168.0.0/24" "Enter your subnet address with mask"
@@ -69,7 +70,13 @@ setup() {
         echo "second_worker ansible_host=$SECOND_WORKER_DEBIAN_IP" >> ansible_files/inventory.txt
 
         # Execute docker-compose up -d
+        echo "All variables are entered"
+        echo "Launching docker composing"
         docker-compose up -d
+
+        # Enter the master node
+        echo "Type the following command to enter master container:"
+        echo "docker exec -it master_debian bash"
     fi
 }
 
