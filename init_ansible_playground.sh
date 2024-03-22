@@ -66,6 +66,10 @@ setup() {
     else
         # Export the variables for docker-compose to use
         export SUBNET GATEWAY MASTER_DEBIAN_IP FIRST_WORKER_DEBIAN_IP SECOND_WORKER_DEBIAN_IP
+
+        echo "[local]" > ansible_files/inventory.txt
+        echo "127.0.0.1 ansible_connection=local" >> ansible_files/inventory.txt
+        echo "[workers]" >> ansible_files/inventory.txt
         echo "first_worker ansible_host=$FIRST_WORKER_DEBIAN_IP" >> ansible_files/inventory.txt
         echo "second_worker ansible_host=$SECOND_WORKER_DEBIAN_IP" >> ansible_files/inventory.txt
 
