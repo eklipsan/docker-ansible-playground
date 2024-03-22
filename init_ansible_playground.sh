@@ -76,7 +76,8 @@ setup() {
 
         # Enter the master node
         echo "Type the following command to enter master container:"
-        echo "docker exec -it master_debian bash"
+        echo "For Linux: docker exec -it master_debian bash"
+        echo "For Windows: winpty docker exec -it master_debian bash"
     fi
 }
 

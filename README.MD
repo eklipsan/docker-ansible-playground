@@ -24,10 +24,10 @@ All you need is only Docker (Docker Compose) and if you use Windows, then you ne
    cd docker-ansible-plaground
    ```
 2. Build and Run Containers:
-   Use handy bash script `init_ansible_playground` to configure your ansible setup.
+   Use handy bash script `init_ansible_playground.sh` to configure your ansible setup.
    ```bash
-   chmod 777 init_ansible_playground
-   ./init_ansible_playground
+   chmod +x init_ansible_playground.sh
+   ./init_ansible_playground.sh
    ```
 P.S. If you are deploying the project to https://labs.play-with-docker.com, then you just need to use the default values given in square brackets by simply pressing Enter
 
@@ -36,7 +36,14 @@ P.S. If you are deploying the project to https://labs.play-with-docker.com, then
    - Enter the gateway address of your entered subnet. Example 192.168.1.1
    - Now you need to enter the ip addresses for the master and worker containers. Enter the addresses that are included in the subnet entered earlier and those that are free. For example, 192.168.213
 
-After entering the parameters, the process of building containers will start (1-2 minutes) and at the end you will find yourself in the master container in the working directory of ansible. where you can start learning this tool.
+After entering the parameters, the process of building containers will start (1-2 minutes) and at the end you can the container either using ssh connection or docker command:
+```bash
+docker exec -it [name of container]
+```
+**Warning:** SSH connection works well on a Linux system, unlike Windows because of its default network settings, so you can access the container via the command
+```bash
+winpty docker exec -it master_debian bash
+```
 
 1. If you want to finish working with ansible playground, just type the following in your terminal:
    ```bash
@@ -51,7 +58,6 @@ After entering the parameters, the process of building containers will start (1-
 - `docker-compose.yaml`: Defines and runs the multi-container Docker application.
 - `ansible_files/`: Contains Ansible configuration and inventory files for playbook execution.
 - `sshd_config`: Contains modified ssh parameters to allow access to the container via ssh
-- `container_script.sh`: Contains a small bash script that starts the ssh service on containers and keeps them from crashing.
 - `.env`: Shows the variables that are used by the 'docker-compose.yaml' file
 
 ## SSH Configuration
