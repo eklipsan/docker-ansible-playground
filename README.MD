@@ -45,6 +45,11 @@ docker exec -it [name of container]
 winpty docker exec -it master_debian bash
 ```
 
+**If you want to see** an example of how Ansible works, type the following command in the master node:
+```bash
+ansible-playbook welcome_playbook.yaml
+```
+
 1. If you want to finish working with ansible playground, just type the following in your terminal:
    ```bash
    docker compose down

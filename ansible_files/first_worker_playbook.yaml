@@ -1,0 +1,14 @@
+---
+- name: Output first word from first worker
+  hosts: first_worker
+  gather_facts: false
+  vars:
+    first_word: Hello
+  tasks:
+    - name: save first figlet word to first_worker
+      shell: "figlet {{ first_word }}"
+      register: first_figlet_word
+
+    - name: output figlet date fact
+      debug:
+        var: first_figlet_word.stdout_lines

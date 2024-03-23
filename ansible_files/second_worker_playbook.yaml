@@ -1,0 +1,14 @@
+---
+- name: Output second word from second worker
+  hosts: second_worker
+  gather_facts: false
+  vars:
+    second_word: World!
+  tasks:
+    - name: save second figlet word to second_worker
+      shell: "figlet {{ second_word }}"
+      register: second_figlet_word
+
+    - name: output figlet date fact
+      debug:
+        var: second_figlet_word.stdout_lines

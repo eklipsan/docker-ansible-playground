@@ -1,0 +1,30 @@
+---
+- name: Showing interesting commands
+  hosts: workers
+  any_errors_fatal: true
+  become: yes
+  tasks:
+    - name: installing figlet package
+      apt:
+        name: figlet
+        state: latest
+      when: ansible_os_family == "Debian"
+    
+    - name: installing ping package
+      apt:
+        name: iputils-ping
+        state: latest
+    
+    - name: Display date fact
+      debug:
+        msg: "{{ ansible_date_time.date }} falls on {{ ansible_date_time.weekday }}"
+      register: date_fact
+    
+    - name: copy date_fact to /date_facts.txt
+      lineinfile:
+        path: /date_facts.txt
+        create: true
+        line: "{{ date_fact }}"
+
+- import_playbook: first_worker_playbook.yaml
+- import_playbook: second_worker_playbook.yaml

@@ -44,6 +44,10 @@ docker exec -it [имя контейнера]
 ```bash
 winpty docker exec -it master_debian bash
 ```
+**Если вы хотите увидеть** пример работы Ansible, то введите следующую команду в master контейнере:
+```bash
+ansible-playbook welcome_playbook.yaml
+```
 
 
 1. Если вы хотите закончить работу с игровой площадкой ansible, просто введите в терминале следующее:
